@@ -5,4 +5,4 @@ const setError = (status, message) => {
   return error
 }
 
-module.exports = { setError }
+export default setError

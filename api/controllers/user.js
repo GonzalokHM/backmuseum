@@ -1,6 +1,6 @@
-const bcrypt = require('bcryptjs')
-const generateToken = require('../../config/jwt')
-const User = require('../models/User')
+import bcrypt from 'bcryptjs'
+import { generateSign } from '../../config/jwt.js'
+import User from '../models/User.js'
 
 const registerUser = async (req, res) => {
   const { username, password } = req.body
@@ -26,7 +26,7 @@ const loginUser = async (req, res) => {
   if (!validPassword)
     return res.status(400).json({ error: 'Invalid credentials' })
 
-  const token = generateToken(user._id)
+  const token = generateSign(user._id)
   res.json({ token, username: user.username, scores: user.scores })
 }
 
@@ -82,4 +82,4 @@ const getScore = async (req, res, next) => {
   }
 }
 
-module.exports = { registerUser, loginUser, updateScore, getScore }
+export { registerUser, loginUser, updateScore, getScore }

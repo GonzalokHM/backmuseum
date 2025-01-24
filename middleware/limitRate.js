@@ -1,4 +1,4 @@
-const rateLimit = require('express-rate-limit')
+import rateLimit from 'express-rate-limit'
 
 const apiLimiter = rateLimit({
   windowMs: 3 * 60 * 1000, // 3 minutos
@@ -13,4 +13,4 @@ const apiLimiter = rateLimit({
   }
 })
 
-module.exports = { apiLimiter }
+export default apiLimiter

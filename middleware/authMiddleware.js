@@ -1,6 +1,6 @@
-const User = require('../api/models/User')
-const { setError } = require('../config/errors')
-const { verifyJwt } = require('../config/jwt')
+import User from '../api/models/User.js'
+import setError from '../config/errors.js'
+import { verifyJwt } from '../config/jwt.js'
 
 const isAuth = async (req, res, next) => {
   try {
@@ -22,4 +22,4 @@ const isAuth = async (req, res, next) => {
   }
 }
 
-module.exports = isAuth
+export default isAuth

@@ -1,4 +1,4 @@
-const isAuth = require('../../middleware/authMiddleware')
+import isAuth from '../../middleware/authMiddleware.js'
 const {
   registerUser,
   loginUser,
@@ -13,4 +13,4 @@ userRoutes.post('/login', loginUser)
 userRoutes.post('/update-score', [isAuth], updateScore)
 userRoutes.get('/score', [isAuth], getScore)
 
-module.exports = userRoutes
+export default userRoutes
