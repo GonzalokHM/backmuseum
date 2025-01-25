@@ -22,7 +22,13 @@ app.options('*', cors(corsOptions))
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.status(200).json({ message: 'Welcome to the Museum API' })
+  res.status(200).json({
+    message: 'Welcome to the Museum API',
+    documentation: 'Refer to /api for available endpoints.',
+    endpoints: {
+      users: '/api/users'
+    }
+  })
 })
 
 app.use('/api', indexRouter)
