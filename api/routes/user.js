@@ -9,9 +9,10 @@ import express from 'express'
 
 const userRoutes = express.Router()
 
+userRoutes.get('/', [isAuth], getUsers)
+userRoutes.get('/score', [isAuth], getScore)
 userRoutes.post('/register', registerUser)
 userRoutes.post('/login', loginUser)
 userRoutes.post('/update-score', [isAuth], updateScore)
-userRoutes.get('/score', [isAuth], getScore)
 
 export default userRoutes

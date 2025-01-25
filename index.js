@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import connectDB from './config/db.js'
-import setError from './config/errors.js'
 import indexRouter from './api/routes/indexRouter.js'
 import dotenv from 'dotenv'
+import setError from './config/errors.js'
 dotenv.config()
 
 const app = express()
@@ -24,6 +24,7 @@ app.use(express.json())
 app.use('/api', indexRouter)
 
 app.use('*', (req, res, next) => {
+  console.log(`Ruta no encontrada: ${req.originalUrl}`)
   return next(setError(404, 'Not found'))
 })
 
