@@ -6,6 +6,10 @@ const indexRouter = express.Router()
 
 indexRouter.use(apiLimiter)
 
+indexRouter.get('/', (req, res) => {
+  res.status(200).json({ message: 'API funcionando correctamente' })
+})
+
 indexRouter.use('/users', userRoutes)
 
 export default indexRouter
