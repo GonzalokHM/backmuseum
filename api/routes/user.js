@@ -3,13 +3,14 @@ import {
   registerUser,
   loginUser,
   updateScore,
-  getScore
+  getScore,
+  getUsers
 } from '../controllers/user.js'
 import express from 'express'
 
 const userRoutes = express.Router()
 
-userRoutes.get('/', [isAuth], getUsers)
+userRoutes.get('/', getUsers)
 userRoutes.get('/score', [isAuth], getScore)
 userRoutes.post('/register', registerUser)
 userRoutes.post('/login', loginUser)
