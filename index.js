@@ -1,9 +1,10 @@
-const express = require('express')
-require('dotenv').config()
-const cors = require('cors')
-const connectDB = require('./config/db')
-const { setError } = require('./config/errors')
-const indexRouter = require('./api/routes/indexRouter')
+import express from 'express'
+import cors from 'cors'
+import connectDB from './config/db.js'
+import setError from './config/errors.js'
+import indexRouter from './api/routes/indexRouter.js'
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = express()
 

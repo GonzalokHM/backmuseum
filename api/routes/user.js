@@ -1,12 +1,13 @@
 import isAuth from '../../middleware/authMiddleware.js'
-const {
+import {
   registerUser,
   loginUser,
   updateScore,
   getScore
-} = require('../controllers/user')
+} from '../controllers/user.js'
+import express from 'express'
 
-const userRoutes = require('express').Router()
+const userRoutes = express.Router()
 
 userRoutes.post('/register', registerUser)
 userRoutes.post('/login', loginUser)

@@ -1,7 +1,8 @@
 import apiLimiter from '../../middleware/limitRate.js'
 import userRoutes from './user.js'
+import express from 'express'
 
-const indexRouter = require('express').Router()
+const indexRouter = express.Router()
 
 indexRouter.use(apiLimiter)
 
