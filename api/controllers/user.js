@@ -12,6 +12,19 @@ const getUsers = async (req, res, next) => {
   }
 }
 
+const findUser = async (req, res, next) => {
+  const { username } = req.params
+  try {
+    const user = await User.findOne({ username }).select('-password')
+    if (!user) {
+      return next(setError(404, 'Usuario no encontrado'))
+    }
+    res.status(200).json(user)
+  } catch (error) {
+    next(setError(500, 'Error al obtener el usuario'))
+  }
+}
+
 const registerUser = async (req, res) => {
   const { username, password } = req.body
   try {
@@ -111,4 +124,4 @@ const getScore = async (req, res, next) => {
   }
 }
 
-export { registerUser, loginUser, updateScore, getScore, getUsers }
+export { registerUser, loginUser, updateScore, getScore, getUsers, findUser }
