@@ -13,7 +13,7 @@ const userRoutes = express.Router()
 
 userRoutes.get('/', getUsers)
 userRoutes.get('/profile/:username', [isAuth], findUser)
-userRoutes.get('/score', [isAuth], getScore)
+userRoutes.get('/score/:game', [isAuth], getScore)
 userRoutes.post('/register', registerUser)
 userRoutes.post('/login', loginUser)
 userRoutes.post('/update-score', [isAuth], updateScore)

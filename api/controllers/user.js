@@ -48,8 +48,7 @@ const loginUser = async (req, res) => {
     if (!user) return res.status(400).json({ error: 'Invalid credentials' })
 
     const validPassword = await bcrypt.compare(password, user.password)
-    if (!validPassword)
-      return res.status(400).json({ error: 'Invalid credentials' })
+    if (!validPassword) return next(setError(400, 'Credenciales inválidas'))
 
     const token = generateSign(user._id)
     res.json({ token, username: user.username, scores: user.scores })
@@ -59,7 +58,8 @@ const loginUser = async (req, res) => {
 }
 
 const updateScore = async (req, res) => {
-  const { username, game, score } = req.body
+  const { game, score } = req.body
+  const { username } = req.user
   try {
     const user = await User.findOne({ username })
     if (!user) return res.status(404).json({ error: 'User not found' })
@@ -94,7 +94,8 @@ const updateScore = async (req, res) => {
 }
 
 const getScore = async (req, res, next) => {
-  const { game, username } = req.query
+  const { game } = req.params
+  const { username } = req.user
 
   if (!['puzzle', 'racer', 'shooter'].includes(game)) {
     return next(setError(400, 'Invalid game type'))

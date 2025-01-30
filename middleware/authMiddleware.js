@@ -6,19 +6,22 @@ const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization
     if (!token) {
-      return next(setError(400, 'Te has columpiado, acceso privado'))
+      return next(setError(401, 'Te has columpiado, acceso privado'))
     }
 
     const parsedToken = token.replace('Bearer', '').trim()
     const { id } = verifyJwt(parsedToken)
     const userLogued = await User.findById(id)
+    if (!userLogued) {
+      return next(setError(404, 'Usuario no encontrado'))
+    }
 
     userLogued.password = null
     req.user = userLogued
 
     next()
   } catch (error) {
-    return next(setError(400, 'Llave incorrecta'))
+    return next(setError(403, 'Llave incorrecta'))
   }
 }
 
