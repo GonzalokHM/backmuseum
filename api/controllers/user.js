@@ -51,7 +51,7 @@ const loginUser = async (req, res) => {
     if (!validPassword) return next(setError(400, 'Credenciales inválidas'))
 
     const token = generateSign(user._id)
-    res.json({ token, username: user.username, scores: user.scores })
+    res.status(200).json({ user, token })
   } catch (error) {
     next(setError(500, 'Error during login'))
   }
