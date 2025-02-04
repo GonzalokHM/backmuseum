@@ -26,7 +26,9 @@ app.get('/', (req, res) => {
     message: 'Welcome to the Museum API',
     documentation: 'Refer to /api for available endpoints.',
     endpoints: {
-      users: '/api/users'
+      users: '/api/users',
+      auth: '/api/auth',
+      score: '/api/score'
     }
   })
 })

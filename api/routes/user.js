@@ -1,12 +1,5 @@
 import isAuth from '../../middleware/authMiddleware.js'
-import {
-  registerUser,
-  loginUser,
-  updateScore,
-  getScore,
-  getUsers,
-  findUser
-} from '../controllers/user.js'
+import { getUsers, findUser } from '../controllers/user.js'
 import express from 'express'
 
 const userRoutes = express.Router()
