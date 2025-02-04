@@ -22,10 +22,10 @@ const login = async (req, res) => {
 
   try {
     const user = await User.findOne({ username })
-    if (!user) return res.status(400).json({ error: 'Invalid credentials' })
+    if (!user) return res.status(400).json({ error: 'Invalid username' })
 
     const validPassword = await bcrypt.compare(password, user.password)
-    if (!validPassword) return next(setError(400, 'Credenciales inválidas'))
+    if (!validPassword) return next(setError(400, 'Invalid Credentials'))
 
     const token = generateSign(user._id)
     res.status(200).json({ user, token })
