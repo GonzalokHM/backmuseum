@@ -17,7 +17,7 @@ const findUser = async (req, res, next) => {
     if (!user) {
       return next(setError(404, 'Usuario no encontrado'))
     }
-    res.status(200).json(user)
+    return res.status(200).json(user)
   } catch (error) {
     next(setError(500, 'Error al obtener el usuario'))
   }

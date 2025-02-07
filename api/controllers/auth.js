@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import { generateSign } from '../../config/jwt.js'
 import setError from '../../config/errors.js'
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   const { username, password } = req.body
   try {
     const existingUser = await User.findOne({ username })
@@ -11,13 +11,13 @@ const register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10)
     const newUser = new User({ username, password: hashedPassword })
     await newUser.save()
-    res.status(201).json({ message: 'User registered successfully' })
+    return res.status(201).json({ message: 'User registered successfully' })
   } catch (error) {
-    next(setError(500, 'Error al registrar el usuario'))
+    return next(setError(500, 'Error al registrar el usuario'))
   }
 }
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   const { username, password } = req.body
 
   try {
@@ -28,9 +28,9 @@ const login = async (req, res) => {
     if (!validPassword) return next(setError(400, 'Invalid Credentials'))
 
     const token = generateSign(user._id)
-    res.status(200).json({ user, token })
+    return res.status(200).json({ user, token })
   } catch (error) {
-    next(setError(500, 'Error during login'))
+    return next(setError(500, 'Error during login'))
   }
 }
 

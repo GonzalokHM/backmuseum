@@ -1,6 +1,6 @@
 import setError from '../../config/errors.js'
 
-const updateScore = async (req, res) => {
+const updateScore = async (req, res, next) => {
   const { game, score } = req.body
   const { username } = req.user
   try {
@@ -30,7 +30,10 @@ const updateScore = async (req, res) => {
     }
 
     await user.save()
-    res.json({ message: 'Score updated successfully', scores: user.scores })
+    return res.json({
+      message: 'Score updated successfully',
+      scores: user.scores
+    })
   } catch (error) {
     return next(setError(400, "can't update scores 😱"))
   }
@@ -59,7 +62,7 @@ const getScore = async (req, res, next) => {
       { username: 1, [`scores.${game}`]: 1, _id: 0 }
     )
 
-    res.status(200).json({
+    return res.status(200).json({
       top3: topUsers,
       userScore: user || { message: 'User not found' }
     })
