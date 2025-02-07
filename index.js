@@ -8,6 +8,8 @@ dotenv.config()
 
 const app = express()
 
+app.set('trust proxy', 1)
+
 connectDB()
 const corsOptions = {
   origin: process.env.CORS_ORIGIN.split(','),
