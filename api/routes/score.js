@@ -5,6 +5,6 @@ import express from 'express'
 const scoreRoutes = express.Router()
 
 scoreRoutes.get('/:game', [isAuth], getScore)
-scoreRoutes.post('/update-score', [isAuth], updateScore)
+scoreRoutes.put('/update', [isAuth], updateScore)
 
 export default scoreRoutes

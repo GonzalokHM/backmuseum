@@ -1,4 +1,5 @@
 import setError from '../../config/errors.js'
+import User from '../models/User.js'
 
 const updateScore = async (req, res, next) => {
   const { game, score } = req.body
