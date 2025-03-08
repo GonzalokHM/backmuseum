@@ -8,7 +8,7 @@ dotenv.config()
 
 const app = express()
 
-app.set('trust proxy', 1)
+// app.set('trust proxy', 1)
 
 connectDB()
 const corsOptions = {
@@ -21,8 +21,6 @@ const corsOptions = {
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
 
-app.use(express.json())
-
 app.get('/', (req, res) => {
   res.status(200).json({
     message: 'Welcome to the Museum API',
@@ -34,7 +32,7 @@ app.get('/', (req, res) => {
     }
   })
 })
-
+app.use(express.json())
 app.use('/api', indexRouter)
 
 app.use('*', (req, res, next) => {
